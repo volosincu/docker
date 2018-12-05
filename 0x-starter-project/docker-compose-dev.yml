@@ -1,0 +1,13 @@
+version: "3.6"
+services:
+  0x:
+    container_name: 0x-starter
+    build: .
+    ports:
+      - "8577:8545"
+    networks:
+      ethereum:
+
+networks:
+  ethereum:
+    external: true
