@@ -1,0 +1,27 @@
+version : '3'
+
+services:
+  registry:
+    image: registry:latest
+    ports:
+      - 5000:5000
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - myvolume:/mnt/registry
+  redis:
+    image: redis
+  db:
+    image: postgres
+
+#docker volume create -d local myvolume
+volumes:
+  myvolume:
